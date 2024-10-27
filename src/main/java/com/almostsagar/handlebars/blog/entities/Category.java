@@ -1,11 +1,15 @@
 package com.almostsagar.handlebars.blog.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
+@ToString
 @Table(name = "category")
+@Builder(toBuilder = true)
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

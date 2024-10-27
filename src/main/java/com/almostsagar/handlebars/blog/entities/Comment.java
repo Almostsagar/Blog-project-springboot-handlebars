@@ -1,13 +1,17 @@
 package com.almostsagar.handlebars.blog.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.Date;
 
 @Data
-@Table(name = "comment")
 @Entity
+@ToString
+@Builder(toBuilder = true)
+@Table(name = "comment")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

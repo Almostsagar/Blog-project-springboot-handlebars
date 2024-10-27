@@ -1,10 +1,14 @@
 package com.almostsagar.handlebars.blog.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Data
+@ToString
+@Builder(toBuilder = true)
 @Table(name = "tag")
 public class Tag {
     @Id

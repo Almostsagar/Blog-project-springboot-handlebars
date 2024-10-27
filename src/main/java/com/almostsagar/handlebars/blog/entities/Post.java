@@ -1,17 +1,17 @@
 package com.almostsagar.handlebars.blog.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.Date;
 import java.util.Set;
 
 @Data
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@ToString
+@Builder(toBuilder = true)
 @Table(name = "post")
 public class Post {
 
