@@ -20,9 +20,6 @@ public class CommentService {
      */
     public LinkedList<Comment> getCommentsByPost(Post post) {
         LinkedList<Comment> comments = commentRepository.findByFkPostId(post);
-
-        // return comments.stream().map(comment -> mapToDTO(comment)).collect(Collectors.toList());
-
         return comments;
     }
 }
