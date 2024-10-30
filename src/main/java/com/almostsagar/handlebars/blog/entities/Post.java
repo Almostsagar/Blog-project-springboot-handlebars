@@ -1,18 +1,29 @@
 package com.almostsagar.handlebars.blog.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
 import java.util.Set;
 
-@Data
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+
 @Entity
-@ToString
 @Builder(toBuilder = true)
-@Table(name = "post")
+@Table(name = "post", uniqueConstraints = {
+        @UniqueConstraint(columnNames = { "post_title", "user_id", "category_id" })
+})
 public class Post {
 
     @Id
@@ -23,7 +34,7 @@ public class Post {
     @Column(name = "post_title", nullable = false)
     private String postTitle;
 
-    @Column(name = "post_body")
+    @Column(name = "post_body", columnDefinition = "LONGTEXT")
     private String postBody;
 
     @Column(name = "post_summary")
@@ -43,14 +54,17 @@ public class Post {
     @Column(name = "image_title")
     private String imageTitle;
 
-    @OneToMany(targetEntity = Tag.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "fkPostId")
+    @OneToMany(targetEntity = Tag.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "fkPostId")
+    @ToString.Exclude
+    @JsonManagedReference
     private Set<Tag> postTags;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "post_status", nullable = false)
     private Status postStatus;
 
-    @OneToMany(targetEntity = Comment.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "fkPostId")
+    @OneToMany(targetEntity = Comment.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "fkPostId")
+    @ToString.Exclude
     private Set<Comment> postComments;
 
     private Integer postViews;
@@ -59,9 +73,11 @@ public class Post {
     @JoinColumn(name = "userId", nullable = false)
     private User postAuthor;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "date_created", nullable = false)
     private Date dateCreated;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "date_modified", nullable = false)
     private Date dateModified;
 

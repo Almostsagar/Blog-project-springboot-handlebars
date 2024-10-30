@@ -1,15 +1,25 @@
 package com.almostsagar.handlebars.blog.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+
 @Entity
-@Data
-@ToString
 @Builder(toBuilder = true)
-@Table(name = "tag")
+@Table(name = "tag", uniqueConstraints = {
+        @UniqueConstraint(columnNames = { "tag_name", "post_id" })
+})
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +34,8 @@ public class Tag {
     private Status tagStatus;
 
     @ManyToOne
-    @JoinColumn(name = "postId")
+    @JoinColumn(name = "postId", nullable = false)
+    @ToString.Exclude
+    @JsonBackReference
     private Post fkPostId;
 }

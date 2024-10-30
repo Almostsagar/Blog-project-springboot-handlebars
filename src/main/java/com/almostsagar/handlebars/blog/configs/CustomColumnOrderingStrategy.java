@@ -1,4 +1,4 @@
-package com.almostsagar.handlebars.misc;
+package com.almostsagar.handlebars.blog.configs;
 
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.model.relational.ColumnOrderingStrategyLegacy;

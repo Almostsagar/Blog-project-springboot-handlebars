@@ -11,7 +11,7 @@ import com.almostsagar.handlebars.blog.entities.Status;
 
 @Controller
 public class PostController {
-    @GetMapping(value = { "/", "hello" })
+    @GetMapping(value = { "hello" })
     public String Test(Model model) {
         Category category = Category.builder()
                 .categoryName("Sample Category")

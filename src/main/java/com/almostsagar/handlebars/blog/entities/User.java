@@ -1,13 +1,17 @@
 package com.almostsagar.handlebars.blog.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @ToString
 @Builder(toBuilder = true)
@@ -18,7 +22,7 @@ public class User {
     @Column(name = "user_id")
     private Integer userId;
 
-    @Column(name = "user_name", nullable = false)
+    @Column(name = "user_name", nullable = false, unique = true)
     private String userName;
 
     @Column(name = "user_email", nullable = false)
@@ -31,9 +35,11 @@ public class User {
     @JoinColumn(name = "roleId", nullable = false)
     private Role fk_role_id;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "user_created", updatable = false, nullable = false)
     private Date userCreated;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "user_modified", nullable = false)
     private Date userModified;
 

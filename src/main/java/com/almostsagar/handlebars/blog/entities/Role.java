@@ -1,11 +1,16 @@
 package com.almostsagar.handlebars.blog.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+
 @Entity
 @ToString
 @Builder(toBuilder = true)
@@ -16,6 +21,6 @@ public class Role {
     @Column(name = "role_id")
     private Integer roleId;
 
-    @Column(name = "role_name", nullable = false)
-    private String roleName;  // SUPER_ADMIN, ADMIN, AUTHOR, CONTRIBUTOR, SUBSCRIBER
+    @Column(name = "role_name", nullable = false, unique = true)
+    private String roleName; // SUPER_ADMIN, ADMIN, AUTHOR, CONTRIBUTOR, SUBSCRIBER
 }

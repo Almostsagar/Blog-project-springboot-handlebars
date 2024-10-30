@@ -1,11 +1,16 @@
 package com.almostsagar.handlebars.blog.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+
 @Entity
 @ToString
 @Table(name = "category")
@@ -16,7 +21,7 @@ public class Category {
     @Column(name = "category_id", nullable = false)
     private Integer categoryId;
 
-    @Column(name = "category_name", nullable = false)
+    @Column(name = "category_name", nullable = false, unique = true)
     private String categoryName;
 
     @Enumerated(EnumType.STRING)
