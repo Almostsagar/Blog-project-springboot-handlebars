@@ -1,7 +1,78 @@
-<header>
-    <h1>My Website</h1>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-    </nav>
-</header>
+<!-- Navigation -->
+<nav class="bg-gray-800 fixed top-0 left-0 w-full z-50 shadow-md">
+  <div class="container mx-auto flex items-center justify-between p-4">
+    <!-- Logo Placeholder -->
+    <div class="flex items-center">
+      <div
+        class="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center text-white font-bold"
+      >
+        Logo
+      </div>
+      <a class="text-white text-xl font-bold ml-2" href="/">My Blog</a>
+    </div>
+
+    <button
+      class="text-white lg:hidden"
+      id="navbarToggle"
+      aria-label="Toggle navigation"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16m-7 6h7"
+        />
+      </svg>
+    </button>
+
+    <div
+      class="hidden lg:flex lg:items-center lg:space-x-4"
+      id="navbarResponsive"
+    >
+      <a
+        class="text-white hover:bg-gray-700 px-4 py-2 rounded transition duration-200"
+        href="/"
+        title="Home"
+      >Home</a>
+      <a
+        class="text-white hover:bg-gray-700 px-4 py-2 rounded transition duration-200"
+        href="/about"
+        title="About"
+      >About</a>
+      {{#if true}}
+        <a
+          class="text-white hover:bg-gray-700 px-4 py-2 rounded transition duration-200"
+          href="/signin"
+        >SignIn</a>
+      {{else}}
+        <a
+          class="text-white hover:bg-gray-700 px-4 py-2 rounded transition duration-200"
+          href="/logout"
+        >Logout</a>
+      {{/if}}
+
+      <!-- Search Box -->
+      <div class="ml-4">
+        <input
+          type="text"
+          placeholder="Search..."
+          class="px-4 py-2 w-48 rounded-lg focus:outline-none focus:ring focus:ring-gray-500 transition duration-200 text-black"
+        />
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Optional JavaScript to toggle the mobile menu
+  document.getElementById('navbarToggle').addEventListener('click', function() {
+    const navbarResponsive = document.getElementById('navbarResponsive');
+    navbarResponsive.classList.toggle('hidden');
+  });
+</script>
