@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+@Slf4j
 @Validated
 @RestController
 @RequestMapping("/posts")
 @RequiredArgsConstructor
-@Slf4j
 public class CommentController {
     private final CommentService commentService;
 
@@ -38,11 +38,12 @@ public class CommentController {
     }
 
     @PostMapping("/{postId}/saveComment")
-    public Comment savePostComment(@RequestBody @Validated ObjectNode json, BindingResult bindingResult) {
-        Integer postId = json.get("postId").asInt();
+    public Comment savePostComment(@RequestBody @Validated ObjectNode json,
+            @PathVariable(value = "postId") Integer postId) {
+        postId = (json.get("postId").asInt() == postId) ? json.get("postId").asInt() : null;
         Integer userId = json.get("userId").asInt();
         String comment = json.get("comment").asText();
-        if (postId != null && userId != null && StringUtils.isBlank(comment)) {
+        if (postId == null || userId == null || StringUtils.isBlank(comment)) {
             throw new IllegalArgumentException("postId or userId or comment is null/empty");
         }
         log.info("Inside CommentController -> savePostComment() for postId : " + json.get("postId").asText());
@@ -59,5 +60,13 @@ public class CommentController {
                 .commenter(user)
                 .build();
         return commentService.savePostComment(commentObj);
+    }
+
+    @PostMapping("/{postId}/approveOrRejectComment")
+    public Boolean approveOrRejectPostComment(@RequestBody @Validated ObjectNode json) {
+        Integer postId = json.get("postId").asInt();
+        Integer commentId = json.get("commentId").asInt();
+        Boolean approve = json.get("approve").asBoolean();
+        return commentService.approveOrRejectPostComment(postId, commentId, approve);
     }
 }
