@@ -1,4 +1,4 @@
-package com.almostsagar.handlebars.blog;
+package com.almostsagar.blog;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

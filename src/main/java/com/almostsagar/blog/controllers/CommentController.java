@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.LinkedList;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

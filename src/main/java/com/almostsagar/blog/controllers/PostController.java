@@ -1,12 +1,12 @@
 package com.almostsagar.blog.controllers;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.almostsagar.blog.entities.Post;
 
-@Controller
+@RestController
 public class PostController {
     @GetMapping(value = { "hello" })
     public String Test(Model model) {

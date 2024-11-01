@@ -33,7 +33,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "roleId", nullable = false)
-    private Role fk_role_id;
+    private Role fkRoleId;
 
     @Column(name = "user_profile_pic")
     private String userProfilePic;

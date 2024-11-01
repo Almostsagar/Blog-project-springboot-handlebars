@@ -16,9 +16,6 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
 
-    /*
-     * Get all comments for a post
-     */
     public LinkedList<Comment> getCommentsByPost(Post post) {
         return commentRepository.findByFkPostId(post);
     }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.almostsagar.blog.entities.Post;
 import com.almostsagar.blog.entities.Tag;
 import com.almostsagar.blog.services.TagService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Validated
 @RestController
@@ -28,5 +29,11 @@ public class TagController {
         log.info("Inside TagController -> getTagsByPostId() for postId : " + postId);
         Post post = Post.builder().postId(postId).build();
         return tagService.getTagsByPost(post);
+    }
+
+    @GetMapping("/tags")
+    public LinkedList<Post> getPostsBasedOnTagName(@RequestParam String tagName) {
+        log.info("Inside TagController -> getPostsBasedOnTagName() for tagName : " + tagName);
+        return tagService.getPostsBasedOnTagName(tagName);
     }
 }

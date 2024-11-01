@@ -9,4 +9,5 @@ import java.util.LinkedList;
 
 public interface TagRepository extends CrudRepository<Tag, Integer> {
     LinkedList<Tag> findByFkPostId(Post post);
+    LinkedList<Tag> findByTagName(String tagName);
 }
