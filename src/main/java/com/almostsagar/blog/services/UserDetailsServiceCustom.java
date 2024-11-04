@@ -10,14 +10,15 @@ import com.almostsagar.blog.entities.User;
 import com.almostsagar.blog.entities.UserPrinciple;
 import com.almostsagar.blog.repositories.UserRepository;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class UserDetailsServiceCustom implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

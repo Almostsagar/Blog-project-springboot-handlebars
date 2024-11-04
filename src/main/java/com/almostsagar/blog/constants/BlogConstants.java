@@ -6,4 +6,5 @@ public class BlogConstants {
     public String AUTHOR = "AUTHOR";
     public String CONTRIBUTOR = "CONTRIBUTOR";
     public String SUBSCRIBER = "SUBSCRIBER";
+    public static final Integer PAGE_SIZE = 10;
 }

@@ -32,14 +32,18 @@ public class CommentController {
     @GetMapping("/{postId}/comments")
     public LinkedList<Comment> getCommentsByPostId(@PathVariable(value = "postId") Integer postId) {
         log.info("Inside CommentController -> getCommentsByPostId() for postId : " + postId);
-        Post post = Post.builder().postId(postId).build();
+        Post post = new Post().toBuilder()
+                .postId(postId)
+                .build();
         return commentService.getCommentsByPost(post);
     }
 
     @PostMapping("/{postId}/saveComment")
     public Comment savePostComment(@RequestBody @Validated ObjectNode json,
             @PathVariable(value = "postId") Integer postId) {
-        postId = (json.get("postId").asInt() == postId) ? json.get("postId").asInt() : null;
+        postId = (json.get("postId").asInt() == postId)
+                ? json.get("postId").asInt()
+                : null;
         Integer userId = json.get("userId").asInt();
         String comment = json.get("comment").asText();
         if (postId == null || userId == null || StringUtils.isBlank(comment)) {
@@ -52,8 +56,7 @@ public class CommentController {
         User user = new User().toBuilder()
                 .userId(userId)
                 .build();
-        Comment commentObj = new Comment()
-                .toBuilder()
+        Comment commentObj = new Comment().toBuilder()
                 .comment(comment)
                 .fkPostId(post)
                 .commenter(user)
