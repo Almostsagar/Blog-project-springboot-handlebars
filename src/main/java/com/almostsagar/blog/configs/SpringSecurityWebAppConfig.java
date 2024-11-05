@@ -38,10 +38,8 @@ public class SpringSecurityWebAppConfig {
         return http
                 .csrf(customizer -> customizer.disable())
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/admin/**")
-                        .authenticated()
-                        .anyRequest()
-                        .permitAll())
+                        .requestMatchers("/admin/**").authenticated()
+                        .anyRequest().permitAll())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
                 .rememberMe(remember -> remember.rememberMeServices(rememberMeServices()))
